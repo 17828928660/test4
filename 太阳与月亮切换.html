@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+ 
+<head>
+ <meta charset="UTF-8" />
+ <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+ <title>太阳和月亮切换</title>
+ <style>
+   /* CSS代码在这里*/
+      /* 设置 HTML 元素高度为 100% */
+	  
+       html {
+         height: 100%;
+       }
+    
+       /* 设置 body 元素样式 */
+       body {
+         margin: 0;
+         height: 100%;
+         display: flex;
+         justify-content: center;
+         align-items: center;
+         background-color: #2d3436;
+         font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+       }
+    
+       /* 设置页面容器样式 */
+       #page-container {
+         width: 500px;
+         height: 500px;
+         position: relative;
+         transform-style: preserve-3d;
+         transition: transform 0.3s ease-in-out;
+       }
+    
+       /* 设置太阳和月亮切换按钮样式 */
+       #sun-moon-toggle {
+         position: absolute;
+         top: 20px;
+         right: 0px;
+         z-index: 1;
+         cursor: pointer;
+         width: 60px;
+         height: 60px;
+         display: flex;
+         justify-content: center;
+         align-items: center;
+         border-radius: 50%;
+         background-color: #fff;
+         box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.3);
+         transition: right 0.3s ease-in-out;
+       }
+    
+       /* 设置太阳和月亮图标样式 */
+       #sun-moon-toggle i {
+         font-size: 28px;
+         color: #f39c12;
+         transition: color 0.3s ease-in-out;
+       }
+    
+       /* 设置太阳和月亮切换按钮为夜间模式样式 */
+       #sun-moon-toggle.sun-shown i.fa-moon {
+         color: #f1c40f;
+       }
+    
+       /* 设置太阳和月亮切换按钮为白天模式样式 */
+       #sun-moon-toggle.sun-shown i.fa-sun {
+         color: #fdcb6e;
+       }
+    
+       /* 设置立方体面板样式 */
+       .face {
+         width: 500px;
+         height: 500px;
+         position: absolute;
+         background-repeat: no-repeat;
+         background-size: 100% 100%;
+         border: 5px solid #fff;
+         box-sizing: border-box;
+         transform: translate3d(0, 0, 250px);
+       }
+    
+       /* 设置前面板样式 */
+       .front {
+         background-image: url("https://picsum.photos/500");
+         transform: rotateY(0deg) translateZ(250px);
+       }
+    
+       /* 设置后面板样式 */
+       .back {
+         background-image: url("https://picsum.photos/501");
+         transform: rotateY(180deg) translateZ(250px);
+       }
+    
+       /* 设置上面板样式 */
+       .top {
+         background-image: url("https://picsum.photos/502");
+         transform: rotateX(-90deg) translateZ(250px);
+       }
+    
+       /* 设置底面板样式 */
+       .bottom {
+         background-image: url("https://picsum.photos/503");
+         transform: rotateX(90deg) translateZ(250px);
+       }
+    
+       /* 设置左面板样式 */
+       .left {
+         background-image: url("https://picsum.photos/504");
+         transform: rotateY(-90deg) translateZ(250px);
+       }
+    
+       /* 设置右面板样式 */
+       .right {
+         background-image: url("https://picsum.photos/505");
+         transform: rotateY(90deg) translateZ(250px);
+       }
+ </style>
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+</head>
+ 
+<body>
+  <!-- 页面容器 -->
+  <div id="page-container">
+    <!-- 立方体面板 -->
+    <div class="face front"></div>
+    <div class="face back"></div>
+    <div class="face top"></div>
+    <div class="face bottom"></div>
+    <div class="face left"></div>
+    <div class="face right"></div>
+  </div>
+  <!-- 太阳和月亮切换按钮 -->
+  <div id="sun-moon-toggle" onclick="toggleSunMoon()">
+    <i class="fas fa-moon"></i>
+    <i class="fas fa-sun"></i>
+  </div>
+ 
+ <script type="text/javascript">
+ 	 // 获取DOM元素
+ 	    const pageContainer = document.getElementById("page-container");
+ 	    const sunMoonToggle = document.getElementById("sun-moon-toggle");
+ 	    const moonIcon = document.querySelector("#sun-moon-toggle .fa-moon");
+ 	    const sunIcon = document.querySelector("#sun-moon-toggle .fa-sun");
+ 	 
+ 	    // 初始化变量
+ 	    let isSunShown = false; // 初始状态下显示月亮
+ 	 
+ 	    // 为按钮绑定点击事件
+ 	    function toggleSunMoon() {
+ 	      if (isSunShown) {
+ 	        // 从太阳到月亮
+ 	        sunMoonToggle.classList.remove("sun-shown");
+ 	        moonIcon.style.display = "inline-block";
+ 	        sunIcon.style.display = "none";
+ 	        document.body.style.backgroundColor = "#2d3436";
+ 	      } else {
+ 	        // 从月亮到太阳
+ 	        sunMoonToggle.classList.add("sun-shown");
+ 	        sunIcon.style.display = "inline-block";
+ 	        moonIcon.style.display = "none";
+ 	        document.body.style.backgroundColor = "#ffeaa7";
+ 	      }
+ 	      isSunShown = !isSunShown;
+ 	    }
+ 	 
+ 	    // 鼠标按下事件
+ 	    let isMouseDown = false;
+ 	    let pageX, pageY;
+ 	    document.addEventListener("mousedown", (event) => {
+ 	      isMouseDown = true;
+ 	      pageX = event.pageX;
+ 	      pageY = event.pageY;
+ 	    });
+ 	 
+ 	    // 鼠标松开事件
+ 	    document.addEventListener("mouseup", () => {
+ 	      isMouseDown = false;
+ 	    });
+ 	 
+ 	    // 鼠标移动事件
+ 	    document.addEventListener("mousemove", (event) => {
+ 	      if (!isMouseDown) return;
+ 	      const deltaX = event.pageX - pageX;
+ 	      const deltaY = event.pageY - pageY;
+ 	      pageContainer.style.transform += `rotateX(${deltaY * 0.5}deg) rotateY(${deltaX * -0.5
+ 	        }deg)`;
+ 	      pageX = event.pageX;
+ 	      pageY = event.pageY;
+ 	    });
+ 	 
+ 	    // 鼠标滚轮事件
+ 	    let scale = 1;
+ 	    document.addEventListener("wheel", (event) => {
+ 	      event.preventDefault();
+ 	      scale += event.deltaY * -0.01;
+ 	      scale = Math.min(Math.max(0.5, scale), 3); // 缩放边界
+ 	      pageContainer.style.transform = `rotateX(0deg) rotateY(0deg) scale(${scale})`;
+ 	    });
+ </script>
+	</body>
+</html>

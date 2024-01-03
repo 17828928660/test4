@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>注册表单</title>
+    <style type="text/css">
+	@import url("https://fonts.googleapis.com/css?family=Caveat");
+	html, body {
+	  background: linear-gradient(to bottom, #090513 0%, #964987 75%, #fdbca3 100%);
+	  height: 100%;
+	  display: flex;
+	  align-items: center;
+	  justify-content: center;
+	  overflow: hidden;
+	}
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+        }
+        .container {
+            width: 300px;
+            padding: 16px;
+            background-color: white;
+            margin: 50px auto;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        input[type=text], input[type=password] {
+            width: 100%;
+            padding: 12px 20px;
+            margin: 8px 0;
+            display: inline-block;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 14px 20px;
+            margin: 8px 0;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+        }
+        button:hover {
+            opacity: 0.8;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <label for="uname"><b>用户名</b></label>
+		 <input type="text" placeholder="输入用户名" name="uname" id="uname" required>
+
+        <label for="psw"><b>密码</b></label>
+         <input type="text" placeholder="输入密码" name="uname" id="psw" required>
+
+        <label for="email"><b>邮箱</b></label>
+      <input type="text" placeholder="输入邮箱" name="uname" id="email" required>
+
+        <button type="submit" onclick="register()">注册</button>
+    </div>
+	<script>
+	function register() {
+	    var uname = document.getElementById("uname").value;
+	    var psw = document.getElementById("psw").value;
+		var psw = document.getElementById("email").value;
+	    if (uname != "" && psw != "" && email !="") {
+	        alert("注册成功！");
+			window.location.href="登陆界面.html";
+	    } else {
+	        alert("请填写完整的用户名和密码！");
+	    }
+	}
+			</script>
+</body>
+</html>
